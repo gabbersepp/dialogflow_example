@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Serialization;
+using WebApplication1.Bot;
 
 namespace WebApplication1
 {
@@ -26,24 +27,32 @@ namespace WebApplication1
         {
             services.AddMvc();
 
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            services.AddCors(options =>
             {
-                builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
-            }));
+                options.AddPolicy("CorsPolicy", builder =>
+                {
+                    builder.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowAnyOrigin()
+                        .AllowCredentials();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseOptions();
+            app.UseCors("CorsPolicy");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
             app.UseMvc();
-            app.UseCors("MyPolicy");
+
+            BotProvider.RegisterIntentHandler("conversation.end", new ConversationEndIntentHandler());
+            BotProvider.RegisterIntentHandler("math.request.binary", new MathIntentHandler());
         }
     }
 }

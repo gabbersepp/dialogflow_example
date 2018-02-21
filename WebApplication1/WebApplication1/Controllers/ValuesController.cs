@@ -11,9 +11,29 @@ namespace WebApplication1.Controllers
     {
         [HttpPost]
         [Route("api/bot/sendQuery")]
-        public void SendQuery([FromBody]BotControllerRequest text)
+        public BotResponse SendQuery([FromBody] BotControllerRequest text)
         {
-            new BotProvider().SendQuery(text.Text);
+            var provider = new BotProvider();
+            var response = provider.SendQuery(text.Text, text.SessionId);
+            if (!response.Result.ActionIncomplete && provider.ProcessResponse(response) != null)
+            {
+                if (provider.ValidateResponse(response))
+                {
+                    return new BotResponse
+                    {
+                        Result = new BotResponseResult
+                        {
+                            Fulfillment = new BotResponseFulfillment {Speech = provider.ProcessResponse(response), Dialog = provider.GetBasicDialog(response)}
+                        }
+                    };
+                }
+                else
+                {
+                    return provider.SendQuery(text.Text, text.SessionId, provider.GetValidContexts(response));
+                }
+            }
+
+            return response;
         }
     }
 }

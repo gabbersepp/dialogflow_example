@@ -1,0 +1,47 @@
+.messagecontainer {
+    width: 450px;
+    height: 450px;
+}
+.messagecontainer .messages {
+    width:450px;
+    height: 400px;
+    overflow: scroll;
+}
+
+.messagecontainer .messages .own {
+    width: 300px;
+    margin-left: 100px;
+    margin-bottom:2px;
+    marin-top: 2px;
+    text-align: right;
+    border-color: black;
+    border-width: 1px;
+    background-color: lightgrey;
+}
+
+.messagecontainer .messages .agent {
+    width: 300px;
+    margin-right: 100px;
+    margin-bottom:2px;
+    marin-top: 2px;
+    text-align: left;
+    border-color: black;
+    border-width: 1px;
+    background-color: lightgreen;
+}
+
+.messagecontainer .messageinput {
+    height:50px;
+    width:100%;
+}
+#messageinput {
+    width: 75%;
+    float:left;
+}
+#messagesubmit {
+    width: 10%;
+}
+#messagenew {
+    width: 10%;
+    float: right;
+}

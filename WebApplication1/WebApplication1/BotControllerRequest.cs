@@ -3,5 +3,6 @@
     public class BotControllerRequest
     {
         public string Text;
+        public string SessionId;
     }
 }
