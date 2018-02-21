@@ -11,9 +11,9 @@ namespace WebApplication1.Controllers
     {
         [HttpPost]
         [Route("api/bot/sendQuery")]
-        public void SendQuery([FromBody]string text)
+        public void SendQuery([FromBody]BotControllerRequest text)
         {
-            new BotProvider().SendQuery(text);
+            new BotProvider().SendQuery(text.Text);
         }
     }
 }

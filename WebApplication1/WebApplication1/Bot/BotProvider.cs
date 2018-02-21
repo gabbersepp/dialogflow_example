@@ -1,12 +1,11 @@
 ﻿using System;
-using Newtonsoft.Json;
 using RestSharp;
 
 namespace WebApplication1.Bot
 {
     public class BotProvider
     {
-        private string baseUrl = "https://api.api.ai/v1/query?v=20150910";
+        private string baseUrl = "https://api.api.ai/";
         private string accessToken = "";
 
         public BotProvider()
@@ -21,14 +20,15 @@ namespace WebApplication1.Bot
         {
             var obj = new BotQuery
             {
-                Lang = "de",
-                Query = text,
-                SessionId = "alisdalsdkjdjas"
+                lang = "de",
+                query = text,
+                sessionId = "alisdalsdkjdjas"
             };
             var client = new RestClient(baseUrl);
-            var request = new RestRequest("", Method.POST);
+            var request = new RestRequest("v1/query?v=20150910", Method.POST);
             request.AddHeader("Authorization", "Bearer " + accessToken);
-            request.AddBody(JsonConvert.SerializeObject(obj));
+            request.AddJsonBody(obj);
+            request.AddHeader("Content-Type", "application/json; charset=UTF-8");
             var response = client.Execute(request);
             var content = response.Content;
         }

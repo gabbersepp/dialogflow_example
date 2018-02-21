@@ -2,8 +2,8 @@
 {
     public class BotQuery
     {
-        public string Query;
-        public string Lang;
-        public string SessionId;
+        public string query;
+        public string lang;
+        public string sessionId;
     }
 }
