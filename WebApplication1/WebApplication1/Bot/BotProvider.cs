@@ -65,6 +65,11 @@ namespace WebApplication1.Bot
             return d;
         }
 
+        public bool DoesHandlerExist(BotResponse response)
+        {
+            return handlers.ContainsKey(response.Result.Metadata.IntentName);
+        }
+
         public Dialog GetBasicDialog(BotResponse response)
         {
             IBotIntentHandler handler;

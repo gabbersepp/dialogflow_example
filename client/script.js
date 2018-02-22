@@ -24,7 +24,7 @@ function Messages() {
 Messages.prototype.handleDisplayOfDialog = function(data) {
     var dialog = new Dialog();
     $(".messagecontainer .messages").append(dialog.buildHtml(data));
-
+    $('.messages')[0].scrollTop = $('.messages')[0].scrollHeight;
 };
 
 Messages.prototype.send = function() {
@@ -48,16 +48,12 @@ Messages.prototype.processAgentResponse = function(data) {
 
 Messages.prototype.addOwn = function(text) {
     $(".messagecontainer .messages").append("<div class='own'>" + text + "</div>");
-    var myElement = $('.messageinput')[0];
-    var topPos = myElement.offsetTop;
-    $('.messages')[0].scrollTop = topPos;
+    $('.messages')[0].scrollTop = $('.messages')[0].scrollHeight;
 };
 
 Messages.prototype.addAgent = function(text) {
     $(".messagecontainer .messages").append("<div class='agent'>" + text + "</div>");
-    var myElement = $('.messageinput')[0];
-    var topPos = myElement.offsetTop;
-    $('.messages')[0].scrollTop = topPos;
+    $('.messages')[0].scrollTop = $('.messages')[0].scrollHeight;
 };
 
 function Bot() {

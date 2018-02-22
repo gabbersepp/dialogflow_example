@@ -15,7 +15,7 @@ namespace WebApplication1.Controllers
         {
             var provider = new BotProvider();
             var response = provider.SendQuery(text.Text, text.SessionId);
-            if (!response.Result.ActionIncomplete && (response.Result.Fulfillment?.Speech ?? "") == "")
+            if (!response.Result.ActionIncomplete && provider.DoesHandlerExist(response))
             {
                 //if (provider.ValidateResponse(response))
                 //{
