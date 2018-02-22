@@ -45,3 +45,49 @@
     width: 10%;
     float: right;
 }
+
+.dialog {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    background-color: beige;
+    width: 300px;
+    padding: 10px;
+}
+
+.dialog .element {
+    width: 80%;
+    margin: 5px;
+}
+
+.dialog .element.button {
+    background: #f513ae;
+    background-image: -webkit-linear-gradient(top, #f513ae, #cf14b3);
+    background-image: -moz-linear-gradient(top, #f513ae, #cf14b3);
+    background-image: -ms-linear-gradient(top, #f513ae, #cf14b3);
+    background-image: -o-linear-gradient(top, #f513ae, #cf14b3);
+    background-image: linear-gradient(to bottom, #f513ae, #cf14b3);
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.dialog .element.button:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+}
+
+.dialog .element.input input {
+    width: 100%;
+}

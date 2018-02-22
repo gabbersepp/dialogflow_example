@@ -4,6 +4,7 @@ namespace WebApplication1.Bot
 {
     public class Dialog
     {
+        
         public List<Element> Elements = new List<Element>();
 
         public Dialog AddTextInput(string name)
@@ -28,20 +29,37 @@ namespace WebApplication1.Bot
     public class Element
     {
         public string Name;
+        public string Type { get; }
+
+        public Element(string type)
+        {
+            Type = type;
+        }
     }
 
     public class TextInput : Element
     {
+        public TextInput() : base("textinput")
+        {
+        }
     }
 
     public class Button : Element
     {
         public string Text;
+
+        public Button() : base("button")
+        {
+        }
     }
 
     public class TextPanel : Element
     {
         public string Text;
+
+        public TextPanel() : base("textpanel")
+        {
+        }
     }
 
 }

@@ -15,10 +15,10 @@ namespace WebApplication1.Controllers
         {
             var provider = new BotProvider();
             var response = provider.SendQuery(text.Text, text.SessionId);
-            if (!response.Result.ActionIncomplete && provider.ProcessResponse(response) != null)
+            if (!response.Result.ActionIncomplete && (response.Result.Fulfillment?.Speech ?? "") == "")
             {
-                if (provider.ValidateResponse(response))
-                {
+                //if (provider.ValidateResponse(response))
+                //{
                     return new BotResponse
                     {
                         Result = new BotResponseResult
@@ -26,11 +26,11 @@ namespace WebApplication1.Controllers
                             Fulfillment = new BotResponseFulfillment {Speech = provider.ProcessResponse(response), Dialog = provider.GetBasicDialog(response)}
                         }
                     };
-                }
+                /*}
                 else
                 {
                     return provider.SendQuery(text.Text, text.SessionId, provider.GetValidContexts(response));
-                }
+                }*/
             }
 
             return response;

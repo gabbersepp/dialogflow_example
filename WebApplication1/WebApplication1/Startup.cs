@@ -52,7 +52,10 @@ namespace WebApplication1
             app.UseMvc();
 
             BotProvider.RegisterIntentHandler("conversation.end", new ConversationEndIntentHandler());
-            BotProvider.RegisterIntentHandler("math.request.binary", new MathIntentHandler());
+            //BotProvider.RegisterIntentHandler("math_calc", new MathIntentHandler());
+            BotProvider.RegisterIntentHandler("math.request.binary.yes", new MathIntentHandler());
+            BotProvider.RegisterIntentHandler("math_request_binary_right_operand.yes", new MathIntentHandler());
+
         }
     }
 }

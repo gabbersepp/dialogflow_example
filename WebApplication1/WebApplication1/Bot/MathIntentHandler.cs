@@ -9,16 +9,17 @@ namespace WebApplication1.Bot
     {
         public string GetMessage(BotResponse response)
         {
-            var z1 = response.Result.Parameters["math_binary_operand_left"];
-            var z2 = response.Result.Parameters["math_binary_operand_right"];
-            var op = response.Result.Parameters["math_operator_binary_operator"];
+            var ctx = response.Result.Contexts.First(x => x.name == "execute_math_calc");
+            var z1 = ctx.parameters["math_binary_operand_left"];
+            var z2 = ctx.parameters["math_binary_operand_right"];
+            var op = ctx.parameters["math_operator_binary_operator"];
 
             return $"Das Ergebnis von {z1} {Operator.Map(op)} {z2} ist " + Operator.TryParse(z1, z2, op);
         }
 
         public bool IsValid(BotResponse response)
         {
-            var z2 = response.Result.Parameters["math_binary_operand_right"];
+            var z2 = response.Result.Contexts.First(x => x.name == "execute_math_calc").parameters["math_binary_operand_right"];
             if (z2 == "0")
             {
                 return false;

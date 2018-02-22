@@ -6,7 +6,7 @@ namespace WebApplication1.Bot
     {
         public string GetMessage(BotResponse response)
         {
-            throw new System.NotImplementedException();
+            return null;
         }
 
         public bool IsValid(BotResponse response)
@@ -21,7 +21,7 @@ namespace WebApplication1.Bot
 
         public Dialog GetDialog(BotResponse response)
         {
-            return new Dialog().AddTextPanel("Haben wir Ihnen geholfen?", "text1").AddButton("Ja", "yes").AddButton("Nein", "no").AddTextInput("reason");
+            return new Dialog().AddTextPanel("Haben wir Ihnen geholfen?", "text1").AddButton("Ja", "yes").AddButton("Nein", "no").AddTextPanel("Grund", "reasonp").AddTextInput("reason");
         }
     }
 }

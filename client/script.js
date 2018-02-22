@@ -21,6 +21,12 @@ function Messages() {
     }).bind(this));
 };
 
+Messages.prototype.handleDisplayOfDialog = function(data) {
+    var dialog = new Dialog();
+    $(".messagecontainer .messages").append(dialog.buildHtml(data));
+
+};
+
 Messages.prototype.send = function() {
     var bot = new Bot();
     var query = this.$messagesInput.val();
@@ -30,9 +36,14 @@ Messages.prototype.send = function() {
 };
 
 Messages.prototype.processAgentResponse = function(data) {
+
     if(data.result.fulfillment && data.result.fulfillment.speech) {
         this.addAgent(data.result.fulfillment.speech);
     }
+    if(data.result.fulfillment && data.result.fulfillment.dialog) {
+        this.handleDisplayOfDialog(data.result.fulfillment.dialog);
+    }
+
 };
 
 Messages.prototype.addOwn = function(text) {
@@ -71,4 +82,35 @@ Bot.prototype.send = function(text, sessionId, callback) {
     function setResponse(data) {
 
     }
+};
+
+function Dialog() {
+
 }
+
+Dialog.prototype.buildHtml = function (data) {
+    var html = "<div class='dialog'>";
+    for(var i = 0; i < data.elements.length; i++) {
+        var e = data.elements[i];
+        switch (e.type) {
+            case "button":  html += this.buildButton(e); break;
+            case "textinput": html += this.buildTextInput(e); break;
+            case "textpanel": html += this.buildPanel(e); break;
+        }
+    }
+    html += "</div>";
+
+    return html;
+};
+
+Dialog.prototype.buildButton = function(button) {
+    return '<div class="element button"><a href>' + button.text + '</a></div>';
+};
+
+Dialog.prototype.buildPanel = function(panel) {
+    return '<div class="element panel">' + panel.text + '</div>';
+};
+
+Dialog.prototype.buildTextInput = function(input) {
+    return '<div class="element input"><input type="text" name="' + input.name + '"/></div></div>';
+};
